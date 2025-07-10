@@ -34,8 +34,13 @@ public class User {
     private List<Order> orders=new ArrayList<>();
 
 
-    @ElementCollection
-    private List<RestaurantDto> favorites= new ArrayList<>();
+    @ManyToMany
+    @JoinTable(
+            name = "user_favorites",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "restaurant_id")
+    )
+    private List<Restaurant> favorites = new ArrayList<>();
 
      @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
      private List<Address> addresses = new ArrayList<>();

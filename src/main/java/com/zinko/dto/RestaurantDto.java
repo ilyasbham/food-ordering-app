@@ -1,8 +1,7 @@
 package com.zinko.dto;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
+import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.Length;
 
@@ -15,8 +14,11 @@ public class RestaurantDto {
     private String title;
 
 
-    @Column(Length=1000)
+    @ElementCollection
+    @CollectionTable(name = "restaurant_images", joinColumns = @JoinColumn(name = "restaurant_id"))
+    @Column(name = "image_url", length = 1000)
     private List<String> images;
+
 
     private String description;
 
